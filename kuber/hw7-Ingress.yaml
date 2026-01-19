@@ -1,0 +1,34 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: hw7-ingress
+  namespace: mantogin-hw7
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  ingressClassName: "nginx"
+  rules:
+    - host: arch.homework
+      http:
+        paths:
+          - path: /billing
+            pathType: Prefix
+            backend:
+              service:
+                name: billing-load-balancer
+                port:
+                  number: 8001
+          - path: /notifications
+            pathType: Prefix
+            backend:
+              service:
+                name: notifications-load-balancer
+                port:
+                  number: 8002
+          - path: /order
+            pathType: Prefix
+            backend:
+              service:
+                name: order-load-balancer
+                port:
+                  number: 8003

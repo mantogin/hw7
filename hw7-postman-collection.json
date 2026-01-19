@@ -1,0 +1,262 @@
+{
+	"info": {
+		"_postman_id": "076137ce-3d7b-49fe-875c-793d63689783",
+		"name": "hw7-postman-collection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "50241720",
+		"_collection_link": "https://mantogin-2217932.postman.co/workspace/Anton-Malmygin's-Workspace~da479b08-9671-4a9a-8f34-a9a19ba5c590/collection/50241720-076137ce-3d7b-49fe-875c-793d63689783?action=share&source=collection_link&creator=50241720"
+	},
+	"item": [
+		{
+			"name": "createAccount",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const response = pm.response.text();\r",
+							"pm.collectionVariables.set(\"account\", response);"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://{{baseUrl}}:8001/billing/account",
+					"protocol": "http",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"port": "8001",
+					"path": [
+						"billing",
+						"account"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "changeAccountBalance",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "100",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{baseUrl}}:8001/billing/account/{{account}}",
+					"protocol": "http",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"port": "8001",
+					"path": [
+						"billing",
+						"account",
+						"{{account}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "createOrder1",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"accountNumber\": {{account}},\r\n    \"сost\": 50\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{baseUrl}}:8003/orders",
+					"protocol": "http",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"port": "8003",
+					"path": [
+						"orders"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getAccountBalance1",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{baseUrl}}:8001/billing/account/{{account}}",
+					"protocol": "http",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"port": "8001",
+					"path": [
+						"billing",
+						"account",
+						"{{account}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getAccountNotification1",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{baseUrl}}:8002/notifications/account/{{account}}",
+					"protocol": "http",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"port": "8002",
+					"path": [
+						"notifications",
+						"account",
+						"{{account}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "createOrder2",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"accountNumber\": {{account}},\r\n    \"сost\": 500\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{baseUrl}}:8003/orders",
+					"protocol": "http",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"port": "8003",
+					"path": [
+						"orders"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getAccountBalance2",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{baseUrl}}:8001/billing/account/{{account}}",
+					"protocol": "http",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"port": "8001",
+					"path": [
+						"billing",
+						"account",
+						"{{account}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getAccountNotification2",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{baseUrl}}:8002/notifications/account/{{account}}",
+					"protocol": "http",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"port": "8002",
+					"path": [
+						"notifications",
+						"account",
+						"{{account}}"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					"console.log(\"---------------------------------------\");\r",
+					"console.log(\"URL: \" + pm.request.url.toString());\r",
+					"console.log(\"--- REQUEST ---\");\r",
+					"console.log(\"Method: \" + pm.request.method);\r",
+					"console.log(\"Headers: \" + JSON.stringify(pm.request.headers));\r",
+					"if (pm.request.body) {\r",
+					"    console.log(\"Body: \" + pm.request.body.toString());\r",
+					"} else {\r",
+					"    console.log(\"Body: \");\r",
+					"}"
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					"console.log(\"--- RESPONSE ---\");\r",
+					"console.log(\"Status: \" + pm.response.code);\r",
+					"console.log(\"Body: \" + pm.response.text());\r",
+					"console.log(\"---------------------------------------\");"
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "arch.homework"
+		},
+		{
+			"key": "account",
+			"value": "",
+			"type": "default"
+		}
+	]
+}
